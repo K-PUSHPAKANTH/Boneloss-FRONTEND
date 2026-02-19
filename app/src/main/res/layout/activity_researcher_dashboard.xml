@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F9FAFB"
+    tools:context=".ResearcherDashboardActivity">
+
+    <!-- Fragment Container -->
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/admin_fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="72dp" />
+
+    <!-- Bottom Navigation -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="84dp"
+        android:layout_gravity="bottom"
+        app:cardElevation="16dp"
+        app:cardCornerRadius="24dp"
+        android:layout_marginBottom="-12dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="12dp"
+            android:orientation="horizontal"
+            android:background="@color/white"
+            android:paddingHorizontal="16dp">
+
+            <!-- Home -->
+            <LinearLayout android:id="@+id/nav_home" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:gravity="center" android:orientation="vertical">
+                <ImageView android:layout_width="24dp" android:layout_height="24dp" android:src="@drawable/ic_cardiogram" app:tint="#9CA3AF" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Home" android:textColor="#9CA3AF" android:textSize="10sp" android:layout_marginTop="2dp"/>
+            </LinearLayout>
+
+            <!-- Analytics -->
+            <LinearLayout android:id="@+id/nav_analytics" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:gravity="center" android:orientation="vertical">
+                <ImageView android:layout_width="24dp" android:layout_height="24dp" android:src="@drawable/ic_analytics" app:tint="#9CA3AF" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Analytics" android:textColor="#9CA3AF" android:textSize="10sp" android:layout_marginTop="2dp"/>
+            </LinearLayout>
+            
+            <!-- FAB/Records - Floating Style in Middle -->
+            <LinearLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:gravity="center" android:orientation="vertical">
+                 <FrameLayout
+                     android:id="@+id/nav_fab"
+                     android:layout_width="56dp"
+                     android:layout_height="56dp"
+                     android:background="@drawable/circle_background"
+                     android:backgroundTint="#8B5CF6"
+                     android:elevation="4dp"
+                     android:translationY="-10dp">
+                     <ImageView
+                         android:layout_width="28dp"
+                         android:layout_height="28dp"
+                         android:layout_gravity="center"
+                         android:src="@drawable/ic_folder_open"
+                         app:tint="@color/white" />
+                 </FrameLayout>
+            </LinearLayout>
+
+            <!-- Security/Privacy -->
+            <LinearLayout android:id="@+id/nav_security" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:gravity="center" android:orientation="vertical">
+                <ImageView android:layout_width="24dp" android:layout_height="24dp" android:src="@drawable/ic_shield_check_outline" app:tint="#9CA3AF" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Security" android:textColor="#9CA3AF" android:textSize="10sp" android:layout_marginTop="2dp"/>
+            </LinearLayout>
+
+            <!-- Profile/Settings -->
+            <LinearLayout android:id="@+id/nav_profile" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:gravity="center" android:orientation="vertical">
+                <ImageView android:layout_width="24dp" android:layout_height="24dp" android:src="@drawable/ic_person" app:tint="#9CA3AF" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Profile" android:textColor="#9CA3AF" android:textSize="10sp" android:layout_marginTop="2dp"/>
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- ✅ Internet permission (REQUIRED for API calls) -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Boneloss"
+        android:usesCleartextTraffic="true"
+        tools:targetApi="31">
+
+        <!-- Splash Screen -->
+        <activity
+            android:name=".SplashActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Role Selection Screen -->
+        <activity
+            android:name=".RoleSelectionActivity"
+            android:exported="false" />
+
+        <!-- Login Screen -->
+        <activity
+            android:name=".LoginActivity"
+            android:exported="false" />
+
+        <!-- Register Screen -->
+        <activity
+            android:name=".RegisterActivity"
+            android:exported="false" />
+
+        <!-- Home Screen -->
+        <activity
+            android:name=".HomeActivity"
+            android:exported="false" />
+
+        <!-- Complete Profile Screen -->
+        <activity
+            android:name=".CompleteProfileActivity"
+            android:exported="false" />
+
+        <!-- Student Dashboard Screen -->
+        <activity
+            android:name=".StudentDashboardActivity"
+            android:exported="false" />
+
+        <!-- Learning Modules Screen -->
+        <activity
+            android:name=".LearningModulesActivity"
+            android:exported="false" />
+
+        <!-- Clinician Dashboard Screen -->
+        <activity
+            android:name=".ClinicianDashboardActivity"
+            android:exported="false" />
+
+        <!-- Researcher Dashboard Screen -->
+        <activity
+            android:name=".ResearcherDashboardActivity"
+            android:exported="false" />
+
+        <!-- Analytics Dashboard Screen -->
+        <activity
+            android:name=".AnalyticsActivity"
+            android:exported="false" />
+
+        <!-- Patient History Screen -->
+        <activity
+            android:name=".PatientHistoryActivity"
+            android:exported="false" />
+
+        <!-- Settings Screen -->
+        <activity
+            android:name=".SettingsActivity"
+            android:exported="false" />
+
+        <!-- Edit Profile Screen -->
+        <activity
+            android:name=".NotificationsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EditProfileActivity"
+            android:exported="false" />
+
+        <!-- Notifications Settings Screen -->
+        <activity
+            android:name=".NotificationsSettingsActivity"
+            android:exported="false" />
+
+        <!-- Privacy & Security Screen -->
+        <activity
+            android:name=".PrivacySecurityActivity"
+            android:exported="false" />
+
+        <!-- Upload Radiograph Screen -->
+        <activity
+            android:name=".UploadRadiographActivity"
+            android:exported="false" />
+
+        <!-- Image Preview Screen -->
+        <activity
+            android:name=".ImagePreviewActivity"
+            android:exported="false" />
+
+        <!-- AI Analysis Loading Screen -->
+        <activity
+            android:name=".AnalysisLoadingActivity"
+            android:exported="false" />
+
+        <!-- Tooth Detection Results Screen -->
+        <activity
+            android:name=".ToothDetectionActivity"
+            android:exported="false" />
+
+        <!-- Alveolar Bone Level Detection Screen -->
+        <activity
+            android:name=".AlveolarBoneLevelDetectionActivity"
+            android:exported="false" />
+
+        <!-- Bone Loss Measurement Screen -->
+        <activity
+            android:name=".BoneLossMeasurementActivity"
+            android:exported="false" />
+
+        <!-- Distribution Analysis Screen -->
+        <activity
+            android:name=".DistributionAnalysisActivity"
+            android:exported="false" />
+
+        <!-- Severity Classification Screen -->
+        <activity
+            android:name=".SeverityClassificationActivity"
+            android:exported="false" />
+
+        <!-- Clinical Interpretation Screen -->
+        <activity
+            android:name=".ClinicalInterpretationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TreatmentRecommendationsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ReportSummaryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PdfExportActivity"
+            android:label="Export Report"
+            android:theme="@style/Theme.Boneloss"
+            android:exported="false" />
+        <activity
+            android:name=".PredictionActivity"
+            android:exported="false" />
+
+    </application>
+
+</manifest>

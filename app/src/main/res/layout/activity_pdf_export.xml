@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".PdfExportActivity">
+
+    <!-- Header / Toolbar -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="@color/white"
+        android:elevation="4dp"
+        android:paddingHorizontal="16dp">
+
+        <ImageView
+            android:id="@+id/btn_close"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="8dp"
+            android:src="@drawable/ic_back"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/text_dark" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Export PDF Preview"
+            android:textColor="@color/text_dark"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/btn_share_top"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="8dp"
+            android:src="@drawable/ic_share"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/primary_blue" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Document Preview Area -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#F3F4F6"
+        android:padding="24dp">
+
+        <!-- Outer Document Page Container -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="32dp">
+
+                <!-- PDF Document Header -->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="32dp">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="BONELOSS AI"
+                            android:textColor="@color/primary_blue"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Periodontal Analysis Report"
+                            android:textColor="@color/text_gray"
+                            android:textSize="12sp"
+                            android:letterSpacing="0.05" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:text="CONFIDENTIAL"
+                        android:textColor="#EF4444"
+                        android:textSize="10sp"
+                        android:textStyle="bold"
+                        android:background="#FEF2F2"
+                        android:paddingHorizontal="8dp"
+                        android:paddingVertical="4dp" />
+                </RelativeLayout>
+
+                <!-- Patient Details Block -->
+                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#E5E7EB" />
+                
+                <GridLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:columnCount="2"
+                    android:layout_marginVertical="24dp">
+                    
+                    <LinearLayout android:orientation="vertical" android:layout_columnWeight="1">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="PATIENT NAME" android:textSize="10sp" android:textColor="@color/text_gray" android:textStyle="bold" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="John Doe" android:textColor="@color/text_dark" android:textSize="14sp" android:textStyle="bold" android:layout_marginTop="4dp" />
+                    </LinearLayout>
+
+                    <LinearLayout android:orientation="vertical" android:layout_columnWeight="1">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="PATIENT ID" android:textSize="10sp" android:textColor="@color/text_gray" android:textStyle="bold" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="P-2024-087" android:textColor="@color/text_dark" android:textSize="14sp" android:textStyle="bold" android:layout_marginTop="4dp" />
+                    </LinearLayout>
+
+                    <LinearLayout android:orientation="vertical" android:layout_columnWeight="1" android:layout_marginTop="16dp">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="CLINICIAN" android:textSize="10sp" android:textColor="@color/text_gray" android:textStyle="bold" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Dr. Sarah Wilson" android:textColor="@color/text_dark" android:textSize="14sp" android:textStyle="bold" android:layout_marginTop="4dp" />
+                    </LinearLayout>
+
+                    <LinearLayout android:orientation="vertical" android:layout_columnWeight="1" android:layout_marginTop="16dp">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="REPORT DATE" android:textSize="10sp" android:textColor="@color/text_gray" android:textStyle="bold" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Jan 22, 2025" android:textColor="@color/text_dark" android:textSize="14sp" android:textStyle="bold" android:layout_marginTop="4dp" />
+                    </LinearLayout>
+                </GridLayout>
+
+                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#E5E7EB" android:layout_marginBottom="32dp" />
+
+                <!-- Executive Summary in PDF -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1. EXECUTIVE SUMMARY"
+                    android:textColor="@color/primary_blue"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="16dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#F9FAFB"
+                    android:padding="20dp"
+                    android:orientation="vertical"
+                    android:layout_marginBottom="32dp">
+                    
+                    <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Average Bone Loss" android:textColor="@color/text_dark" android:textSize="14sp" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentEnd="true" android:text="32.5%" android:textColor="#F97316" android:textSize="18sp" android:textStyle="bold" />
+                    </RelativeLayout>
+                    
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:text="Overall classification indicates Moderate Chronic Periodontitis. Generalized bone loss observed across multiple quadrants." android:textColor="@color/text_gray" android:textSize="13sp" android:lineSpacingExtra="4dp" />
+                </LinearLayout>
+
+                <!-- Tooth Breakdown in PDF -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2. ARCH BREAKDOWN"
+                    android:textColor="@color/primary_blue"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="16dp" />
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:stretchColumns="*">
+                    
+                    <TableRow android:background="#F3F4F6" android:padding="12dp">
+                        <TextView android:text="Tooth" android:textStyle="bold" android:textSize="12sp" android:textColor="@color/text_dark" />
+                        <TextView android:text="Loss (%)" android:textStyle="bold" android:textSize="12sp" android:textColor="@color/text_dark" android:gravity="center" />
+                        <TextView android:text="Root (mm)" android:textStyle="bold" android:textSize="12sp" android:textColor="@color/text_dark" android:gravity="end" />
+                    </TableRow>
+
+                    <TableRow android:padding="12dp">
+                        <TextView android:text="Tooth #11" android:textSize="12sp" android:textColor="@color/text_dark" />
+                        <TextView android:text="22%" android:textSize="12sp" android:textColor="@color/text_dark" android:gravity="center" />
+                        <TextView android:text="12.5mm" android:textSize="12sp" android:textColor="@color/text_dark" android:gravity="end" />
+                    </TableRow>
+                    
+                    <View android:layout_width="match_parent" android:layout_height="0.5dp" android:background="#E5E7EB" />
+
+                    <TableRow android:padding="12dp">
+                        <TextView android:text="Tooth #12" android:textSize="12sp" android:textColor="@color/text_dark" />
+                        <TextView android:text="18%" android:textSize="12sp" android:textColor="@color/text_dark" android:gravity="center" />
+                        <TextView android:text="11.8mm" android:textSize="12sp" android:textColor="@color/text_dark" android:gravity="end" />
+                    </TableRow>
+                    
+                    <View android:layout_width="match_parent" android:layout_height="0.5dp" android:background="#E5E7EB" />
+                    
+                    <TableRow android:padding="12dp">
+                        <TextView android:text="Tooth #14" android:textSize="12sp" android:textColor="#EF4444" android:textStyle="bold" />
+                        <TextView android:text="48%" android:textSize="12sp" android:textColor="#EF4444" android:textStyle="bold" android:gravity="center" />
+                        <TextView android:text="13.2mm" android:textSize="12sp" android:textColor="@color/text_dark" android:gravity="end" />
+                    </TableRow>
+                </TableLayout>
+
+                <!-- Footer / Signoff -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="48dp"
+                    android:orientation="vertical">
+                    <View android:layout_width="120dp" android:layout_height="1dp" android:background="@color/text_dark" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:text="Analysed by Boneloss AI Engine v2.4" android:textColor="@color/text_gray" android:textSize="10sp" android:fontFamily="sans-serif-condensed" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- Bottom Action Bar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:elevation="16dp"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <Button
+            android:id="@+id/btn_share_bottom"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_secondary_light"
+            android:text="SHARE"
+            android:textAllCaps="false"
+            android:textColor="@color/primary_blue"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btn_save_pdf"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_marginStart="8dp"
+            android:layout_weight="2"
+            android:background="@drawable/button_primary"
+            android:text="SAVE AS PDF"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+</LinearLayout>
