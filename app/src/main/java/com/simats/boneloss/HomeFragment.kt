@@ -36,12 +36,37 @@ class HomeFragment : Fragment() {
             (activity as? ClinicianDashboardActivity)?.navigateToAnalytics()
         }
         view.findViewById<TextView>(R.id.tv_view_all_home).setOnClickListener {
-            (activity as? ClinicianDashboardActivity)?.navigateToHistory()
+            (activity as? ClinicianDashboardActivity)?.navigateToFiles()
         }
 
         // Set clinician name
         view.findViewById<TextView>(R.id.tv_clinician_name).text = "Dr. Sarah Johnson"
 
+        updateLatestCase(view)
+
         return view
+    }
+
+    private fun updateLatestCase(view: View) {
+        val sharedPref = requireActivity().getSharedPreferences("BoneLossPrefs", Context.MODE_PRIVATE)
+        val latestPrediction = sharedPref.getString("LATEST_PREDICTION", null)
+        val latestConfidence = sharedPref.getFloat("LATEST_CONFIDENCE", 0f)
+        val latestAverageBoneLoss = sharedPref.getFloat("LATEST_AVERAGE_BONE_LOSS", 0f)
+
+        if (latestPrediction != null) {
+            val tvPatientStatus = view.findViewById<TextView>(R.id.tv_view_all_home).rootView.findViewWithTag<TextView>("latest_patient_status") ?: return
+            
+            val confidencePercent = String.format("%.2f", latestConfidence)
+            val boneLossPercent = String.format("%.2f", latestAverageBoneLoss)
+            
+            tvPatientStatus.text = "$latestPrediction • $boneLossPercent% bone loss • $confidencePercent% confidence"
+            
+            when (latestPrediction) {
+                "Healthy", "Mild" -> tvPatientStatus.setTextColor(android.graphics.Color.parseColor("#10B981"))
+                "Moderate" -> tvPatientStatus.setTextColor(android.graphics.Color.parseColor("#F97316"))
+                "Severe" -> tvPatientStatus.setTextColor(android.graphics.Color.parseColor("#EF4444"))
+                else -> tvPatientStatus.setTextColor(android.graphics.Color.GRAY)
+            }
+        }
     }
 }

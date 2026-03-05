@@ -58,7 +58,10 @@ class EditProfileActivity : AppCompatActivity() {
         }
 
         binding.navFabContainer.setOnClickListener {
-            val intent = Intent(this, PatientHistoryActivity::class.java)
+            val sharedPrefs = getSharedPreferences("user_profile", MODE_PRIVATE)
+            val userId = sharedPrefs.getInt("user_id", -1)
+            val intent = Intent(this, HistoryActivity::class.java)
+            intent.putExtra("user_id", userId)
             startActivity(intent)
         }
 

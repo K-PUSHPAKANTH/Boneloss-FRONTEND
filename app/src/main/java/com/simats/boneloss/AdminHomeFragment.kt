@@ -22,6 +22,7 @@ class AdminHomeFragment : Fragment() {
         val btnNotifications = view.findViewById<FrameLayout>(R.id.btn_notifications_home)
         val btnAnalytics = view.findViewById<LinearLayout>(R.id.btn_analytics_home)
         val btnSettings = view.findViewById<LinearLayout>(R.id.btn_settings_home)
+        val tvViewAllAlerts = view.findViewById<TextView>(R.id.tv_view_all_alerts)
 
         // Get user name from SharedPreferences
         val sharedPrefs = requireContext().getSharedPreferences("user_profile", android.content.Context.MODE_PRIVATE)
@@ -38,6 +39,10 @@ class AdminHomeFragment : Fragment() {
 
         btnSettings.setOnClickListener {
             (activity as? ResearcherDashboardActivity)?.navigateToProfile()
+        }
+
+        tvViewAllAlerts.setOnClickListener {
+            startActivity(Intent(requireContext(), SystemAlertsActivity::class.java))
         }
 
         return view

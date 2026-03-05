@@ -76,13 +76,24 @@
                             android:alpha="0.8"/>
 
                         <TextView
+                            android:id="@+id/tv_severity_status"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
-                            android:text="MODERATE - 32.5% AVERAGE LOSS"
+                            android:text="ANALYSING IMAGE..."
                             android:textColor="@color/white"
                             android:textSize="14sp"
                             android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_average_bone_loss"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Average Bone Loss: --%"
+                            android:textColor="@color/white"
+                            android:textSize="14sp"
+                            android:alpha="0.9" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -103,13 +114,24 @@
                     app:cardCornerRadius="32dp"
                     app:cardElevation="6dp">
 
-                    <ImageView
-                        android:id="@+id/iv_heatmap"
+                    <FrameLayout
                         android:layout_width="match_parent"
-                        android:layout_height="260dp"
-                        android:padding="16dp"
-                        android:scaleType="centerInside"
-                        android:src="@drawable/bone_visualization_mock" />
+                        android:layout_height="320dp"
+                        android:padding="16dp">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rv_heatmap"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scrollbars="vertical" />
+
+                        <ProgressBar
+                            android:id="@+id/pb_loading"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:visibility="gone" />
+                    </FrameLayout>
                 </androidx.cardview.widget.CardView>
 
                 <!-- Heatmap Legend Section -->

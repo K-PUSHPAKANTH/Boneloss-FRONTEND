@@ -88,8 +88,18 @@ class LoginActivity : AppCompatActivity() {
                 
                 Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show()
                 
-                // Navigate to HomeActivity
-                val intent = Intent(this, HomeActivity::class.java)
+                val finalRole = (selectedRole ?: user?.role ?: "dentist").lowercase()
+                
+                // Navigate based on role
+                val nextActivity = when {
+                    finalRole.contains("student") -> StudentDashboardActivity::class.java
+                    finalRole.contains("admin") -> AdminDashboardActivity::class.java
+                    finalRole.contains("researcher") -> ResearcherDashboardActivity::class.java
+                    else -> HomeActivity::class.java
+                }
+                
+                val intent = Intent(this, nextActivity)
+                intent.putExtra("user_id", user?.id ?: -1)
                 startActivity(intent)
                 finish()
             } else {

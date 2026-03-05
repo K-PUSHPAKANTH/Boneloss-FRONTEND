@@ -59,6 +59,11 @@ class StudentProfileFragment : Fragment() {
             startActivity(intent)
         }
 
+        binding.btnAboutFrag.setOnClickListener {
+            val intent = Intent(requireContext(), AboutActivity::class.java)
+            startActivity(intent)
+        }
+
         binding.btnLogoutFrag.setOnClickListener {
             requireContext().getSharedPreferences("user_profile", MODE_PRIVATE).edit().clear().apply()
             val intent = Intent(requireContext(), RoleSelectionActivity::class.java)

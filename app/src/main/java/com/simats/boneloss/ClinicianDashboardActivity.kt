@@ -13,15 +13,15 @@ class ClinicianDashboardActivity : AppCompatActivity() {
 
     private lateinit var navHome: LinearLayout
     private lateinit var navAnalytics: LinearLayout
-    private lateinit var navHistory: LinearLayout
+    private lateinit var navFiles: LinearLayout
     private lateinit var navProfile: LinearLayout
-    
+
     private lateinit var ivHome: ImageView
     private lateinit var tvHome: TextView
     private lateinit var ivAnalytics: ImageView
     private lateinit var tvAnalytics: TextView
-    private lateinit var ivHistory: ImageView
-    private lateinit var tvHistory: TextView
+    private lateinit var ivFiles: ImageView
+    private lateinit var tvFiles: TextView
     private lateinit var ivProfile: ImageView
     private lateinit var tvProfile: TextView
 
@@ -34,7 +34,7 @@ class ClinicianDashboardActivity : AppCompatActivity() {
 
         // Load default fragment
         if (savedInstanceState == null) {
-            loadFragment(HomeFragment(), "HOME")
+            loadFragment(DentistHomeFragment(), "HOME")
             updateNavUI("HOME")
         }
 
@@ -46,51 +46,49 @@ class ClinicianDashboardActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
-        navHome = findViewById(R.id.nav_home)
+        navHome     = findViewById(R.id.nav_home)
         navAnalytics = findViewById(R.id.nav_analytics)
-        navHistory = findViewById(R.id.nav_patients)
-        navProfile = findViewById(R.id.nav_profile)
+        navFiles    = findViewById(R.id.nav_patients)
+        navProfile  = findViewById(R.id.nav_profile)
 
-        ivHome = navHome.getChildAt(0) as ImageView
-        tvHome = navHome.getChildAt(1) as TextView
-        
-        ivAnalytics = navAnalytics.getChildAt(0) as ImageView
-        tvAnalytics = navAnalytics.getChildAt(1) as TextView
-        
-        ivHistory = navHistory.getChildAt(0) as ImageView
-        tvHistory = navHistory.getChildAt(1) as TextView
-        
-        ivProfile = navProfile.getChildAt(0) as ImageView
-        tvProfile = navProfile.getChildAt(1) as TextView
+        // Use explicit IDs — safe, no index-based casting
+        ivHome      = findViewById(R.id.iv_nav_home)
+        tvHome      = findViewById(R.id.tv_nav_home)
+        ivAnalytics = findViewById(R.id.iv_nav_analytics)
+        tvAnalytics = findViewById(R.id.tv_nav_analytics)
+        ivFiles     = findViewById(R.id.iv_nav_files)
+        tvFiles     = findViewById(R.id.tv_nav_files)
+        ivProfile   = findViewById(R.id.iv_nav_profile)
+        tvProfile   = findViewById(R.id.tv_nav_profile)
     }
 
     private fun setupNavigation() {
         navHome.setOnClickListener {
-            loadFragment(HomeFragment(), "HOME")
+            loadFragment(DentistHomeFragment(), "HOME")
             updateNavUI("HOME")
         }
         navAnalytics.setOnClickListener {
-            loadFragment(AnalyticsFragment(), "ANALYTICS")
+            loadFragment(DentistAnalyticsFragment(), "ANALYTICS")
             updateNavUI("ANALYTICS")
         }
-        navHistory.setOnClickListener {
-            loadFragment(HistoryFragment(), "HISTORY")
-            updateNavUI("HISTORY")
+        navFiles.setOnClickListener {
+            loadFragment(DentistFilesFragment(), "FILES")
+            updateNavUI("FILES")
         }
         navProfile.setOnClickListener {
-            loadFragment(ProfileFragment(), "PROFILE")
+            loadFragment(DentistProfileFragment(), "PROFILE")
             updateNavUI("PROFILE")
         }
     }
 
     private fun loadFragment(fragment: Fragment, tag: String) {
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.nav_host_fragment, fragment, tag)
-        transaction.commit()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.nav_host_fragment, fragment, tag)
+            .commit()
     }
 
     private fun updateNavUI(tag: String) {
-        val activeColor = getColor(R.color.primary_blue)
+        val activeColor   = getColor(R.color.primary_blue)
         val inactiveColor = getColor(R.color.text_gray)
 
         ivHome.setColorFilter(if (tag == "HOME") activeColor else inactiveColor)
@@ -99,20 +97,20 @@ class ClinicianDashboardActivity : AppCompatActivity() {
         ivAnalytics.setColorFilter(if (tag == "ANALYTICS") activeColor else inactiveColor)
         tvAnalytics.setTextColor(if (tag == "ANALYTICS") activeColor else inactiveColor)
 
-        ivHistory.setColorFilter(if (tag == "HISTORY") activeColor else inactiveColor)
-        tvHistory.setTextColor(if (tag == "HISTORY") activeColor else inactiveColor)
+        ivFiles.setColorFilter(if (tag == "FILES") activeColor else inactiveColor)
+        tvFiles.setTextColor(if (tag == "FILES") activeColor else inactiveColor)
 
         ivProfile.setColorFilter(if (tag == "PROFILE") activeColor else inactiveColor)
         tvProfile.setTextColor(if (tag == "PROFILE") activeColor else inactiveColor)
     }
 
     fun navigateToAnalytics() {
-        loadFragment(AnalyticsFragment(), "ANALYTICS")
+        loadFragment(DentistAnalyticsFragment(), "ANALYTICS")
         updateNavUI("ANALYTICS")
     }
 
-    fun navigateToHistory() {
-        loadFragment(HistoryFragment(), "HISTORY")
-        updateNavUI("HISTORY")
+    fun navigateToFiles() {
+        loadFragment(DentistFilesFragment(), "FILES")
+        updateNavUI("FILES")
     }
 }

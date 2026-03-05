@@ -53,6 +53,18 @@ class AdminProfileFragment : Fragment() {
             (activity as? ResearcherDashboardActivity)?.navigateToSecurity()
         }
 
+        binding.btnNotificationsAdmin.setOnClickListener {
+            startActivity(Intent(requireContext(), NotificationsActivity::class.java))
+        }
+
+        binding.btnSupportAdmin.setOnClickListener {
+            startActivity(Intent(requireContext(), HelpSupportActivity::class.java))
+        }
+
+        binding.btnAboutAdmin.setOnClickListener {
+            startActivity(Intent(requireContext(), AboutActivity::class.java))
+        }
+
         binding.btnLogoutAdmin.setOnClickListener {
             requireContext().getSharedPreferences("user_profile", Context.MODE_PRIVATE).edit().clear().apply()
             val intent = Intent(requireContext(), RoleSelectionActivity::class.java)

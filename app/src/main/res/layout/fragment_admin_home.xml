@@ -305,12 +305,16 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/tv_view_all_alerts"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:text="View All"
                         android:textColor="#8B5CF6"
-                        android:textSize="12sp" />
+                        android:textSize="12sp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:textStyle="bold" />
                 </RelativeLayout>
 
                 <!-- Alert Card -->

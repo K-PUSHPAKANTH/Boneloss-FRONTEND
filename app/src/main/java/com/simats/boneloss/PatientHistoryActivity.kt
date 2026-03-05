@@ -19,5 +19,11 @@ class PatientHistoryActivity : AppCompatActivity() {
             val intent = Intent(this, SettingsActivity::class.java)
             startActivity(intent)
         }
+
+        findViewById<android.view.View>(R.id.card_latest_case).setOnClickListener {
+            val intent = Intent(this, FullPatientReportActivity::class.java)
+            intent.putExtra("ANALYSIS_ID", 87) // Example ID matching the P-2024-087 case
+            startActivity(intent)
+        }
     }
 }

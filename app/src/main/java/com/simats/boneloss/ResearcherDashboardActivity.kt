@@ -64,7 +64,11 @@ class ResearcherDashboardActivity : AppCompatActivity() {
         navFab.setOnClickListener {
             // Center button (Records/Datasets) - Keep as separate activity for now or migrate to fragment?
             // Existing logic: Patients History
-            startActivity(Intent(this, PatientHistoryActivity::class.java))
+            val sharedPrefs = getSharedPreferences("user_profile", MODE_PRIVATE)
+            val userId = sharedPrefs.getInt("user_id", -1)
+            val intent = Intent(this, HistoryActivity::class.java)
+            intent.putExtra("user_id", userId)
+            startActivity(intent)
         }
     }
 

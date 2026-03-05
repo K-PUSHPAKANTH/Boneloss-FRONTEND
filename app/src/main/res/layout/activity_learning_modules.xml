@@ -272,6 +272,7 @@
                 </LinearLayout>
 
                 <Button
+                    android:id="@+id/btn_continue_radiographic"
                     android:layout_width="wrap_content"
                     android:layout_height="32dp"
                     android:background="@drawable/button_primary"
@@ -411,6 +412,94 @@
                     android:layout_height="20dp"
                     android:src="@drawable/ic_lock"
                     app:tint="@color/text_gray" />
+            </LinearLayout>
+
+            <!-- Section: Modern AI & comparative -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Modern AI &amp; Comparative"
+                android:textColor="@color/text_dark"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <!-- Module 7: AI-Assisted Diagnosis -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/bg_patient_card"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/circle_blue_light"
+                    android:padding="12dp"
+                    android:src="@drawable/ic_play_circle" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="AI-Assisted Diagnosis" android:textColor="@color/text_dark" android:textSize="14sp" android:textStyle="bold" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="New • 5 lessons" android:textColor="@color/primary_blue" android:textSize="12sp" android:layout_marginTop="4dp" />
+                </LinearLayout>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:background="@drawable/button_primary"
+                    android:paddingHorizontal="12dp"
+                    android:text="Start"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    tools:ignore="TouchTargetSizeCheck" />
+            </LinearLayout>
+
+            <!-- Module 8: Comparative Radiography -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/bg_patient_card"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/circle_blue_light"
+                    android:padding="12dp"
+                    android:src="@drawable/ic_play_circle" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Comparative Radiography" android:textColor="@color/text_dark" android:textSize="14sp" android:textStyle="bold" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="New • 6 lessons" android:textColor="@color/primary_blue" android:textSize="12sp" android:layout_marginTop="4dp" />
+                </LinearLayout>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:background="@drawable/button_primary"
+                    android:paddingHorizontal="12dp"
+                    android:text="Start"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    tools:ignore="TouchTargetSizeCheck" />
             </LinearLayout>
 
         </LinearLayout>

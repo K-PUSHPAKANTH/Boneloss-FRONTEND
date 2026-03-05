@@ -5,6 +5,8 @@
     <!-- ✅ Internet permission (REQUIRED for API calls) -->
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="32" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="28" tools:ignore="ScopedStorage" />
 
     <application
         android:allowBackup="true"
@@ -17,6 +19,17 @@
         android:theme="@style/Theme.Boneloss"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+
+        <!-- FileProvider for secure file sharing -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
 
         <!-- Splash Screen -->
         <activity
@@ -157,6 +170,14 @@
             android:name=".ReportSummaryActivity"
             android:exported="false" />
         <activity
+            android:name=".HistoryActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Boneloss" />
+
+        <activity
+            android:name=".FullPatientReportActivity"
+            android:exported="false" />
+        <activity
             android:name=".PdfExportActivity"
             android:label="Export Report"
             android:theme="@style/Theme.Boneloss"
@@ -164,6 +185,28 @@
         <activity
             android:name=".PredictionActivity"
             android:exported="false" />
+        <activity
+            android:name=".AdminDashboardActivity"
+            android:exported="false" />
+        <activity
+            android:name=".HelpSupportActivity"
+            android:exported="false" />
+
+        <!-- System Alerts Screen -->
+        <activity
+            android:name=".SystemAlertsActivity"
+            android:exported="false" />
+
+        <!-- About Screen -->
+        <activity
+            android:name=".AboutActivity"
+            android:exported="false" />
+
+        <!-- New Learning Module Activity -->
+        <activity
+            android:name=".RadiographicInterpretationActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Boneloss" />
 
     </application>
 

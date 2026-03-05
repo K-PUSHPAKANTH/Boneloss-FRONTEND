@@ -108,11 +108,39 @@
                             android:gravity="center"
                             android:orientation="vertical"
                             android:padding="16dp">
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="24" android:textColor="@color/white" android:textSize="24sp" android:textStyle="bold" />
+                            <TextView 
+                                android:id="@+id/tv_total_cases"
+                                android:layout_width="wrap_content" 
+                                android:layout_height="wrap_content" 
+                                android:text="--" 
+                                android:textColor="@color/white" 
+                                android:textSize="24sp" 
+                                android:textStyle="bold" />
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Total Users" android:textColor="#E0F2FE" android:textSize="11sp" />
+                        </LinearLayout>
+
+                        <!-- Completed -->
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="4dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_home_stat_card"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="16dp">
+                            <TextView 
+                                android:id="@+id/tv_completed_cases"
+                                android:layout_width="wrap_content" 
+                                android:layout_height="wrap_content" 
+                                android:text="--" 
+                                android:textColor="@color/white" 
+                                android:textSize="24sp" 
+                                android:textStyle="bold" />
                             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Total Cases" android:textColor="#E0F2FE" android:textSize="11sp" />
                         </LinearLayout>
 
-                        <!-- Pending -->
+                        <!-- Accuracy/Bone Loss -->
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -122,22 +150,15 @@
                             android:gravity="center"
                             android:orientation="vertical"
                             android:padding="16dp">
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="3" android:textColor="@color/white" android:textSize="24sp" android:textStyle="bold" />
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Pending" android:textColor="#E0F2FE" android:textSize="11sp" />
-                        </LinearLayout>
-
-                        <!-- Accuracy -->
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="4dp"
-                            android:layout_weight="1"
-                            android:background="@drawable/bg_home_stat_card"
-                            android:gravity="center"
-                            android:orientation="vertical"
-                            android:padding="16dp">
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="95.8%" android:textColor="@color/white" android:textSize="24sp" android:textStyle="bold" />
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Accuracy" android:textColor="#E0F2FE" android:textSize="11sp" />
+                            <TextView 
+                                android:id="@+id/tv_avg_bone_loss"
+                                android:layout_width="wrap_content" 
+                                android:layout_height="wrap_content" 
+                                android:text="--%" 
+                                android:textColor="@color/white" 
+                                android:textSize="24sp" 
+                                android:textStyle="bold" />
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="AI Accuracy" android:textColor="#E0F2FE" android:textSize="11sp" />
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
@@ -158,72 +179,42 @@
                     <TextView android:id="@+id/btn_view_all" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentEnd="true" android:text="View All" android:textColor="@color/primary_blue" android:textSize="14sp" />
                 </RelativeLayout>
 
-                <LinearLayout
+                <!-- Error Message Debug View -->
+            <TextView
+                android:id="@+id/tv_error_debug"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginTop="8dp"
+                android:background="#FFECEC"
+                android:gravity="center"
+                android:padding="8dp"
+                android:textColor="#D32F2F"
+                android:textSize="12sp"
+                android:visibility="gone"
+                tools:text="Connection Error: Attempt to connect to 10.116.89.43:8000 failed"
+                tools:visibility="visible" />
+
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:orientation="vertical">
+                    android:layout_marginTop="16dp">
 
-                    <!-- Activity Item 1 -->
-                    <LinearLayout
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_recent_activity"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="12dp"
-                        android:background="@drawable/bg_patient_card"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:padding="16dp">
+                        android:minHeight="100dp"
+                        android:nestedScrollingEnabled="false"
+                        tools:listitem="@layout/item_recent_activity" />
 
-                        <ImageView
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
-                            android:background="@drawable/circle_green_light"
-                            android:padding="12dp"
-                            android:src="@drawable/ic_cardiogram"
-                            app:tint="@color/success_green" />
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Patient ID: P-2024-087" android:textColor="@color/text_dark" android:textSize="15sp" android:textStyle="bold" />
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="2dp" android:text="Completed • 18% bone loss detected" android:textColor="@color/text_gray" android:textSize="12sp" />
-                        </LinearLayout>
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="View" android:textColor="@color/primary_blue" android:textSize="13sp" />
-                    </LinearLayout>
-
-                    <!-- Activity Item 2 -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    <ProgressBar
+                        android:id="@+id/pb_dashboard"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="12dp"
-                        android:background="@drawable/bg_patient_card"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:padding="16dp">
-
-                        <ImageView
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
-                            android:background="@drawable/circle_yellow"
-                            android:padding="12dp"
-                            android:src="@drawable/ic_cardiogram"
-                            app:tint="#F59E0B" />
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Patient ID: P-2024-086" android:textColor="@color/text_dark" android:textSize="15sp" android:textStyle="bold" />
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="2dp" android:text="Completed • 38% bone loss detected" android:textColor="@color/text_gray" android:textSize="12sp" />
-                        </LinearLayout>
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="View" android:textColor="@color/primary_blue" android:textSize="13sp" />
-                    </LinearLayout>
-                </LinearLayout>
+                        android:layout_centerInParent="true"
+                        android:visibility="gone" />
+                </RelativeLayout>
             </LinearLayout>
 
             <!-- New Analysis Card (overlapping) -->

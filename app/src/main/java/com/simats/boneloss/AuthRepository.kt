@@ -3,7 +3,7 @@ package com.simats.boneloss
 import retrofit2.Response
 
 class AuthRepository {
-    private val apiService = RetrofitClient.apiService
+    private val apiService = ApiClient.apiService
 
     suspend fun login(loginRequest: LoginRequest): Response<LoginResponse> {
         return apiService.loginUser(loginRequest)

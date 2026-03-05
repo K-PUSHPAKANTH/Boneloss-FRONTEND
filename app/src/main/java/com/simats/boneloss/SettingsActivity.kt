@@ -60,6 +60,16 @@ class SettingsActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        binding.btnHelpSupport.setOnClickListener {
+            val intent = Intent(this, HelpSupportActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.btnAbout.setOnClickListener {
+            val intent = Intent(this, AboutActivity::class.java)
+            startActivity(intent)
+        }
+
         binding.btnLogoutSection.setOnClickListener {
             getSharedPreferences("user_profile", Context.MODE_PRIVATE).edit().clear().apply()
             val intent = Intent(this, RoleSelectionActivity::class.java)

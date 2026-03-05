@@ -338,6 +338,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Patient ID: P-2024-085"
+                        android:tag="latest_patient_id"
                         android:textColor="@color/text_dark"
                         android:textSize="14sp"
                         android:textStyle="bold" />
@@ -345,6 +346,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Severe • 62% bone loss"
+                        android:tag="latest_patient_status"
                         android:textColor="#B91C1C"
                         android:textSize="12sp" />
                 </LinearLayout>

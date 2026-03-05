@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace = "com.simats.boneloss"
-    compileSdk = 36
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.simats.boneloss"
-        minSdk = 35
-        targetSdk = 36
+        minSdk = 26
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -63,4 +63,5 @@ dependencies {
     implementation(libs.androidx.lifecycle.livedata.ktx)
     implementation(libs.androidx.activity.ktx)
     implementation(libs.androidx.fragment.ktx)
+    implementation(libs.androidx.swiperefreshlayout)
 }

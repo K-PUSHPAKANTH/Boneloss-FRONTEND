@@ -24,8 +24,13 @@ import java.io.IOException
 class UploadRadiographActivity : AppCompatActivity() {
 
     private val pickImageLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
-        uri?.let {
-            uploadImage(it)
+        uri?.let { uploadImage(it) }
+    }
+
+    private val takePictureLauncher = registerForActivityResult(ActivityResultContracts.TakePicturePreview()) { bitmap ->
+        bitmap?.let {
+            // Handle bitmap upload (omitted for brevity, or convert to Uri)
+            Toast.makeText(this, "Scanning feature coming soon in full version", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -38,8 +43,12 @@ class UploadRadiographActivity : AppCompatActivity() {
         val cardScanImage = findViewById<LinearLayout>(R.id.card_scan_image)
         val cardRecentFiles = findViewById<LinearLayout>(R.id.card_recent_files)
 
-        btnBack.setOnClickListener {
-            onBackPressed()
+        btnBack.setOnClickListener { finish() }
+
+        val uploadMode = intent.getStringExtra("UPLOAD_MODE") ?: "UPLOAD"
+        if (uploadMode == "SCAN") {
+            // If started in SCAN mode, we could auto-launch camera or picker
+            // takePictureLauncher.launch(null) 
         }
 
         btnChooseFile.setOnClickListener {
@@ -47,39 +56,74 @@ class UploadRadiographActivity : AppCompatActivity() {
         }
 
         cardScanImage.setOnClickListener {
-            pickImageLauncher.launch("image/*")
+            pickImageLauncher.launch("image/*") // In student dashboard, often both open picker for convenience
         }
 
         cardRecentFiles.setOnClickListener {
-            val intent = Intent(this, PatientHistoryActivity::class.java)
+            val sharedPrefs = getSharedPreferences("user_profile", MODE_PRIVATE)
+            val userId = sharedPrefs.getInt("user_id", -1)
+            val intent = Intent(this, HistoryActivity::class.java)
+            intent.putExtra("user_id", userId)
             startActivity(intent)
         }
     }
 
     private fun uploadImage(uri: Uri) {
-        val requestBody = createRequestBodyFromUri(uri)
-        if (requestBody == null) {
+        val fileName = getFileName(uri)
+        val requestFile = createRequestBodyFromUri(uri)
+        if (requestFile == null) {
             Toast.makeText(this, "Failed to create request body from Uri", Toast.LENGTH_SHORT).show()
             return
         }
 
-        val fileName = getFileName(uri)
-        val part = MultipartBody.Part.createFormData("file", fileName, requestBody)
+        val multipartBody = MultipartBody.Part.createFormData(
+            "file",
+            fileName,
+            requestFile
+        )
+
+        val sharedPrefs = getSharedPreferences("user_profile", MODE_PRIVATE)
+        val userId = sharedPrefs.getInt("user_id", -1)
+        val patientId = "PATIENT_${System.currentTimeMillis()}" // Placeholder for patient ID
+
+        val patientIdBody = patientId
+            .toRequestBody("text/plain".toMediaTypeOrNull())
+
+        val userIdBody = userId.toString()
+            .toRequestBody("text/plain".toMediaTypeOrNull())
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val response = RetrofitClient.apiService.uploadImage(part)
+                val response = ApiClient.apiService.uploadXray(
+                    patientIdBody,
+                    userIdBody,
+                    multipartBody
+                )
                 withContext(Dispatchers.Main) {
                     if (response.isSuccessful && response.body() != null) {
-                        val prediction = response.body()!!.prediction
+                        val analysisResponse = response.body()!!
+                        val prediction = analysisResponse.prediction
+                        
                         if (prediction == "Invalid Image") {
                             Toast.makeText(this@UploadRadiographActivity, "Invalid Image", Toast.LENGTH_LONG).show()
                         } else {
-                            val confidence = response.body()!!.confidence
-                            val intent = Intent(this@UploadRadiographActivity, PredictionActivity::class.java)
-                            intent.putExtra("PREDICTION", prediction)
-                            intent.putExtra("CONFIDENCE", confidence)
+                            val confidence = analysisResponse.confidence ?: 0f
+                            val analysisId = analysisResponse.analysis_id ?: -1
+                            val averageBoneLoss = analysisResponse.average_bone_loss ?: 0f
+                            val heatmapJson = com.google.gson.Gson().toJson(analysisResponse.heatmap ?: emptyList<HeatmapData>())
+                            
+                            // Save latest prediction for Dashboard
+                            saveLatestPrediction(prediction ?: "Unknown", confidence, averageBoneLoss)
+
+                            val intent = Intent(this@UploadRadiographActivity, SeverityClassificationActivity::class.java).apply {
+                                putExtra("prediction", prediction)
+                                putExtra("confidence", confidence.toDouble())
+                                putExtra("average_bone_loss", averageBoneLoss.toDouble())
+                                putExtra("heatmap_json", heatmapJson)
+                                putExtra("ANALYSIS_ID", analysisId)
+                            }
                             startActivity(intent)
+                            finish()
                         }
                     } else {
                         val errorBody = response.errorBody()?.string() ?: "No error body"
@@ -105,11 +149,22 @@ class UploadRadiographActivity : AppCompatActivity() {
         return try {
             contentResolver.openInputStream(uri)?.use { inputStream ->
                 val fileBytes = inputStream.readBytes()
-                fileBytes.toRequestBody(contentResolver.getType(uri)?.toMediaTypeOrNull())
+                val mediaType = (contentResolver.getType(uri) ?: "image/*").toMediaTypeOrNull()
+                fileBytes.toRequestBody(mediaType)
             }
         } catch (e: IOException) {
             e.printStackTrace()
             null
+        }
+    }
+
+    private fun saveLatestPrediction(prediction: String, confidence: Float, averageBoneLoss: Float) {
+        val sharedPref = getSharedPreferences("BoneLossPrefs", MODE_PRIVATE)
+        with(sharedPref.edit()) {
+            putString("LATEST_PREDICTION", prediction)
+            putFloat("LATEST_CONFIDENCE", confidence)
+            putFloat("LATEST_AVERAGE_BONE_LOSS", averageBoneLoss)
+            apply()
         }
     }
 

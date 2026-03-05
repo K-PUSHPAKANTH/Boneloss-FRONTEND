@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F9FAFB">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:background="@android:color/transparent">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:contentScrim="@color/primary_blue"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:title="Radiographic Analysis"
+            app:expandedTitleMarginStart="24dp"
+            app:expandedTitleMarginBottom="32dp"
+            app:expandedTitleTextAppearance="@style/TextAppearance.AppCompat.Headline">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/bg_profile_gradient"
+                app:layout_collapseMode="parallax" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_dashboard_header_gradient"
+                android:alpha="0.8" />
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:navigationIcon="@drawable/ic_back"
+                app:navigationIconTint="@color/white" />
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <!-- Study Guide Section -->
+            <RelativeLayout
+                android:id="@+id/btn_expand_study_guide"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:clickable="true"
+                android:focusable="true">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="CLINICAL STUDY GUIDE"
+                    android:textColor="@color/text_gray"
+                    android:textSize="12sp"
+                    android:letterSpacing="0.1"
+                    android:textStyle="bold" />
+                <ImageView
+                    android:id="@+id/iv_study_guide_arrow"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/ic_back"
+                    android:rotation="270"
+                    app:tint="@color/text_gray" />
+            </RelativeLayout>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_study_guide"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="2dp"
+                android:layout_marginBottom="32dp"
+                android:visibility="gone">
+                
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+                    
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="1. Alveolar Crest\nNormal crest is 1.5-2.0mm apical to CEJ. A distance >2mm indicates bone loss.\n\n2. Lamina Dura\nIntact radiopaque line signifies health. Fuzziness or absence at the crest is an early sign of periodontitis.\n\n3. PDL Space\nWidening of the radiolucent space suggests inflammation or occlusal trauma.\n\n4. Horizontal Bone Loss\nParallel to the CEJ of adjacent teeth. Most common pattern.\n\n5. Vertical Bone Loss\nAngular pattern where the defect is proximal to one tooth, not parallel to the CEJ line."
+                        android:textColor="@color/text_dark"
+                        android:textSize="14sp"
+                        android:lineSpacingExtra="6dp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Quiz Section -->
+            <LinearLayout
+                android:id="@+id/layout_quiz"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp">
+                    <TextView
+                        android:id="@+id/tv_quiz_progress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Question 1 of 5"
+                        android:textColor="@color/primary_blue"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/tv_score_track"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:text="Score: 0/5"
+                        android:textColor="@color/text_gray"
+                        android:textSize="14sp" />
+                </RelativeLayout>
+
+                <ProgressBar
+                    android:id="@+id/quiz_progress_bar"
+                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp"
+                    android:layout_marginBottom="24dp"
+                    android:max="5"
+                    android:progress="1"
+                    android:progressDrawable="@drawable/progress_bar_custom" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="24dp"
+                    app:cardElevation="2dp"
+                    android:layout_marginBottom="24dp">
+                    
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="24dp">
+                        
+                        <TextView
+                            android:id="@+id/tv_question_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Loading question..."
+                            android:textColor="@color/text_dark"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:lineSpacingExtra="4dp" />
+
+                        <RadioGroup
+                            android:id="@+id/rg_options"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="24dp">
+                            
+                            <RadioButton
+                                android:id="@+id/rb_option1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="16dp"
+                                android:layout_marginBottom="12dp"
+                                android:background="@drawable/bg_interactive_card"
+                                android:button="@null"
+                                android:text="Option 1"
+                                android:textColor="@color/text_dark" />
+
+                            <RadioButton
+                                android:id="@+id/rb_option2"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="16dp"
+                                android:layout_marginBottom="12dp"
+                                android:background="@drawable/bg_interactive_card"
+                                android:button="@null"
+                                android:text="Option 2"
+                                android:textColor="@color/text_dark" />
+
+                            <RadioButton
+                                android:id="@+id/rb_option3"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="16dp"
+                                android:layout_marginBottom="12dp"
+                                android:background="@drawable/bg_interactive_card"
+                                android:button="@null"
+                                android:text="Option 3"
+                                android:textColor="@color/text_dark" />
+
+                            <RadioButton
+                                android:id="@+id/rb_option4"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="16dp"
+                                android:background="@drawable/bg_interactive_card"
+                                android:button="@null"
+                                android:text="Option 4"
+                                android:textColor="@color/text_dark" />
+                        </RadioGroup>
+
+                        <!-- Explanation Section -->
+                        <LinearLayout
+                            android:id="@+id/layout_explanation"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_marginTop="24dp"
+                            android:visibility="gone"
+                            android:padding="16dp"
+                            android:background="@drawable/bg_interactive_card"
+                            android:backgroundTint="#F8FAFC">
+                            
+                            <TextView
+                                android:id="@+id/tv_explanation_title"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Explanation"
+                                android:textColor="@color/primary_blue"
+                                android:textSize="12sp"
+                                android:textStyle="bold"
+                                android:textAllCaps="true" />
+                                
+                            <TextView
+                                android:id="@+id/tv_explanation_text"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:text="This is why the answer is correct."
+                                android:textColor="@color/text_gray"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <Button
+                    android:id="@+id/btn_next_question"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:background="@drawable/button_primary"
+                    android:text="Check Answer"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textAllCaps="false"
+                    android:elevation="2dp"/>
+            </LinearLayout>
+
+            <!-- Final Result Section -->
+            <LinearLayout
+                android:id="@+id/layout_results"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:visibility="gone">
+                
+                <ImageView
+                    android:id="@+id/iv_result_icon"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/ic_check_filled"
+                    app:tint="@color/success_green" />
+                    
+                <TextView
+                    android:id="@+id/tv_result_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Lesson Completed!"
+                    android:textColor="@color/text_dark"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+                    
+                <TextView
+                    android:id="@+id/tv_result_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Your Score: 5/5"
+                    android:textColor="@color/text_gray"
+                    android:textSize="16sp" />
+
+                <Button
+                    android:id="@+id/btn_finish_lesson"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_marginTop="32dp"
+                    android:background="@drawable/button_primary"
+                    android:text="Continue to Next Module"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textAllCaps="false"/>
+
+                <Button
+                    android:id="@+id/btn_retry_quiz"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/button_secondary_light"
+                    android:text="Retry Quiz"
+                    android:textColor="@color/primary_blue"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textAllCaps="false"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
